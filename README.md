@@ -14,6 +14,11 @@ MongoDB shell version v4.2.0
 ```
 
 ## Getting Started
+Install npm package:
+```
+npm install
+```
+
 Copy configuration file
 ```
 cp .env.example .env
