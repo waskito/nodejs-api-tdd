@@ -1,0 +1,27 @@
+{
+  "name": "nodejs-api-tdd",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "env-cmd -f ./.env nodemon src/app.js",
+    "test": "env-cmd -f ./.env.test mocha",
+    "test:watch": "DEBUG=server:debug NODE_ENV=development nodemon --exec mocha -R min "
+  },
+  "author": "Ahmad Rosid",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "chai": "^4.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^6.2.1",
+    "mongodb": "^3.2.7",
+    "mongoose": "^5.5.14",
+    "validator": "^11.0.0"
+  },
+  "devDependencies": {
+    "env-cmd": "^9.0.3",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
+  }
+}

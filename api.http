@@ -1,0 +1,47 @@
+@token = {{login.response.body.token}}
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name":"rosid",
+    "email":"ahmadrosid@gmail.com",
+    "password":"123456"
+}
+
+###
+
+GET http://localhost:3000/users
+Authorization: Bearer {{token}}
+
+
+###
+# @name login
+
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "email":"alahmadrosid@gmail.com",
+    "password":"123456"
+}
+
+###
+GET http://localhost:3000/users/me
+Authorization: Bearer {{token}}
+
+###
+PATCH http://localhost:3000/users
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "ahmad ganteng buanget"
+}
+
+
+###
+DELETE http://localhost:3000/users/5da553443a0aba086a3e3659
+Content-Type: application/json
+Authorization: Bearer {{token}}
