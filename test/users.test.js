@@ -16,7 +16,6 @@ describe('User API Tests', () => {
         expect(response.body).to.include.keys(['token', 'user']);
     })
 
-
     it('POST /users/ create new user validation', async () => {
         const response = await request(server).post('/users').send({});
         expect(response.statusCode).to.equal(422)

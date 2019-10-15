@@ -1,101 +1,13 @@
-const express = require('express')
-const User = require('../models/User')
+const router = require('express').Router()
 const auth = require('../middleware/auth')
+const UserController = require('../controllers/UserController')
 
-const router = express.Router()
-
-router.get('/users', async (req, res) => {
-    // Browse all users
-    try {
-        const users = await User.find()
-        res.status(200).send({ users })
-    } catch (error) {
-        res.status(400).send(error)
-    }
-})
-
-router.post('/users', async (req, res) => {
-    // Create a new user
-    try {
-        const user = new User(req.body)
-        await user.save()
-        const token = await user.generateAuthToken()
-        res.statusCode = 201;
-        res.send({ user, token })
-    } catch (error) {
-        res.statusCode = 422;
-        res.send(error)
-    }
-})
-
-router.patch('/users', auth, async (req, res) => {
-    // Update user
-    try {
-        const user = req.user
-        await user.update(req.body)
-        res.statusCode = 201;
-        res.send({ user })
-    } catch (error) {
-        res.statusCode = 400;
-        res.send(error)
-    }
-})
-
-router.delete('/users/:id', auth, async (req, res) => {
-    // Update user
-    try {
-        await User.deleteOne({ _id: req.params.id });
-
-        res.statusCode = 204;
-        res.send()
-    } catch (error) {
-        res.status(400).send(error)
-    }
-})
-
-router.post('/users/login', async(req, res) => {
-    //Login a registered user
-    try {
-        const { email, password } = req.body
-        const user = await User.findByCredentials(email, password)
-        if (!user) {
-            return res.status(401).send({error: 'Login failed! Check authentication credentials'})
-        }
-        const token = await user.generateAuthToken()
-        res.send({ user, token })
-    } catch (error) {
-        res.status(400).send(error)
-    }
-
-})
-
-router.get('/users/me', auth, async(req, res) => {
-    // View logged in user profile
-    res.send(req.user)
-})
-
-router.post('/users/me/logout', auth, async (req, res) => {
-    // Log user out of the application
-    try {
-        req.user.tokens = req.user.tokens.filter((token) => {
-            return token.token != req.token
-        })
-        await req.user.save()
-        res.send()
-    } catch (error) {
-        res.status(500).send(error)
-    }
-})
-
-router.post('/users/me/logoutall', auth, async(req, res) => {
-    // Log user out of all devices
-    try {
-        req.user.tokens.splice(0, req.user.tokens.length)
-        await req.user.save()
-        res.send()
-    } catch (error) {
-        res.status(500).send(error)
-    }
-})
+router.get('/users', UserController.index)
+router.post('/users', UserController.store)
+router.patch('/users', auth, UserController.update)
+router.delete('/users/:id', auth, UserController.delete)
+router.post('/users/login', UserController.login)
+router.get('/users/me', auth, UserController.me)
+router.post('/users/me/logout', auth, UserController.logout)
 
 module.exports = router
