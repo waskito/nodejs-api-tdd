@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "env-cmd -f ./.env ./node_modules/.bin/nodemon src/app.js",
-    "test": "env-cmd -f ./.env.test ./node_modules/.bin/_mocha",
+    "test": "env-cmd -f ./.env.test ./node_modules/.bin/_mocha --exit",
     "test:watch": "env-cmd -f ./.env.test nodemon --exec ./node_modules/.bin/_mocha -R min "
   },
   "author": "Ahmad Rosid",

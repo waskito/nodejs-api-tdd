@@ -10,7 +10,6 @@ describe('User API Tests', () => {
             password: '123456'
         });
         expect(200).to.equal(200)
-        console.log(response.body);
         expect(response.body).to.be.an.instanceof(Object);
         expect(response.body).to.include.keys(['token', 'user']);
     })
