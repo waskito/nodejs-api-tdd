@@ -39,3 +39,8 @@ Run test
 ```
 npm run test
 ```
+
+## Links & Resources
+- [Chai](https://www.chaijs.com/)
+- [Mocha](https://mochajs.org)
+- [Mongose](https://mongoosejs.com/docs/queries.html)
