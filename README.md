@@ -27,7 +27,7 @@ npm run start
 ## Run The Test
 Copy configuration file
 ```
-cp .env.example .env
+cp .env.example .env.test
 ```
 
 Run test
