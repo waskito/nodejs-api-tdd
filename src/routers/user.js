@@ -20,9 +20,11 @@ router.post('/users', async (req, res) => {
         const user = new User(req.body)
         await user.save()
         const token = await user.generateAuthToken()
-        res.status(201).send({ user, token })
+        res.statusCode = 201;
+        res.send({ user, token })
     } catch (error) {
-        res.status(400).send(error)
+        res.statusCode = 422;
+        res.send(error)
     }
 })
 
@@ -31,9 +33,11 @@ router.patch('/users', auth, async (req, res) => {
     try {
         const user = req.user
         await user.update(req.body)
-        res.status(201).send({ user })
+        res.statusCode = 201;
+        res.send({ user })
     } catch (error) {
-        res.status(400).send(error)
+        res.statusCode = 400;
+        res.send(error)
     }
 })
 
@@ -42,7 +46,8 @@ router.delete('/users/:id', auth, async (req, res) => {
     try {
         await User.deleteOne({ _id: req.params.id });
 
-        res.status(204).send()
+        res.statusCode = 204;
+        res.send()
     } catch (error) {
         res.status(400).send(error)
     }
