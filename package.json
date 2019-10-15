@@ -5,7 +5,7 @@
   "scripts": {
     "start": "env-cmd -f ./.env nodemon src/app.js",
     "test": "env-cmd -f ./.env.test mocha",
-    "test:watch": "DEBUG=server:debug NODE_ENV=development nodemon --exec mocha -R min "
+    "test:watch": "env-cmd -f ./.env.test nodemon --exec mocha -R min "
   },
   "author": "Ahmad Rosid",
   "license": "MIT",
